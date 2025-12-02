@@ -1,0 +1,51 @@
+# APEX Technical Authority Badge Configuration
+# Configures dynamic badges for the README using the flat-square style.
+
+badges:
+  # 1. Continuous Integration Status
+  - name: Build Status
+    url: https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/actions/workflows/ci.yml
+    badge_url: https://img.shields.io/github/actions/workflow/status/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/ci.yml?branch=main&style=flat-square
+    markdown: "[![CI Status](https://img.shields.io/github/actions/workflow/status/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/ci.yml?branch=main&style=flat-square)](https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/actions/workflows/ci.yml)"
+
+  # 2. Code Coverage
+  - name: Code Coverage
+    url: https://codecov.io/gh/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension
+    badge_url: https://codecov.io/gh/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/branch/main/graph/badge.svg?style=flat-square
+    markdown: "[![Code Coverage](https://codecov.io/gh/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/branch/main/graph/badge.svg?style=flat-square)](https://codecov.io/gh/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension)"
+
+  # 3. Technology Stack (Primary Language)
+  - name: Language
+    url: https://www.javascript.com/
+    badge_url: https://img.shields.io/badge/Language-JavaScript-F7DF1E?style=flat-square&logo=javascript
+    markdown: "[![Language: JavaScript](https://img.shields.io/badge/Language-JavaScript-F7DF1E?style=flat-square&logo=javascript)](https://www.javascript.com/)"
+
+  # 4. Core Technologies (Clerk)
+  - name: Auth Framework
+    url: https://clerk.com/
+    badge_url: https://img.shields.io/badge/Auth-Clerk-6C47FF?style=flat-square&logo=clerk
+    markdown: "[![Auth: Clerk](https://img.shields.io/badge/Auth-Clerk-6C47FF?style=flat-square&logo=clerk)](https://clerk.com/)"
+
+  # 5. Core Technologies (MongoDB)
+  - name: Database
+    url: https://www.mongodb.com/
+    badge_url: https://img.shields.io/badge/Database-MongoDB-47A248?style=flat-square&logo=mongodb
+    markdown: "[![Database: MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?style=flat-square&logo=mongodb)](https://www.mongodb.com/)"
+
+  # 6. Linting/Formatting (Biome)
+  - name: Linter/Formatter
+    url: https://biomejs.dev/
+    badge_url: https://img.shields.io/badge/Linter-Biome-60C0A4?style=flat-square&logo=biome
+    markdown: "[![Linter: Biome](https://img.shields.io/badge/Linter-Biome-60C0A4?style=flat-square&logo=biome)](https://biomejs.dev/)"
+
+  # 7. Metadata (License)
+  - name: License
+    url: https://creativecommons.org/licenses/by-nc/4.0/
+    badge_url: https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=flat-square
+    markdown: "[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=flat-square)](LICENSE)"
+
+  # 8. Social Proof (Stars)
+  - name: GitHub Stars
+    url: https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/stargazers
+    badge_url: https://img.shields.io/github/stars/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension?style=flat-square
+    markdown: "[![GitHub Stars](https://img.shields.io/github/stars/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension?style=flat-square)](https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/stargazers)"
