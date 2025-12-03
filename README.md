@@ -1,90 +1,70 @@
-<p align="center">
-  <a href="https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension">
-    <img src="https://raw.githubusercontent.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/main/.github/assets/banner.png" alt="ClerkFlow Banner" width="800">
-  </a>
-</p>
+# ClerkFlow-Secure-Auth-Browser-Extension
 
-<p align="center">
-  <a href="https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/ci.yml?branch=main&style=flat-square&label=Build" alt="Build Status">
-  </a>
-  <a href="https://codecov.io/gh/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension" target="_blank">
-    <img src="https://img.shields.io/codecov/c/github/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension?style=flat-square&token=YOUR_CODECOV_TOKEN" alt="Code Coverage">
-  </a>
-  <img src="https://img.shields.io/badge/Stack-JS%20%7C%20Clerk%20%7C%20MongoDB%20%7C%20MV3-informational?style=flat-square" alt="Tech Stack">
-  <img src="https://img.shields.io/badge/Lint%2FFormat-ESLint%20%7C%20Prettier-blueviolet?style=flat-square" alt="Lint & Format">
-  <a href="https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=flat-square" alt="License">
-  </a>
-  <a href="https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/stargazers">
-    <img src="https://img.shields.io/github/stars/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension?style=flat-square&color=orange" alt="GitHub Stars">
-  </a>
-</p>
+![GitHub Actions Build Status](https://img.shields.io/github/actions/workflow/status/chirag127/ClerkFlow-Secure-Auth-Browser-Extension/ci.yml?style=flat-square)
+![Code Coverage](https://img.shields.io/codecov/c/github/chirag127/ClerkFlow-Secure-Auth-Browser-Extension?style=flat-square)
+![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?style=flat-square)
+![Frameworks](https://img.shields.io/badge/Frameworks-React%20%7C%20Vite-F15A29?style=flat-square)
+![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue?style=flat-square)
+![GitHub Stars](https://img.shields.io/github/stars/chirag127/ClerkFlow-Secure-Auth-Browser-Extension?style=flat-square)
 
-<h3 align="center">Star ⭐ this Repo!</h3>
+**[⭐ Star ⭐ this Repo if you find it useful!]**
 
----
+## :sparkles: Project Overview
 
-# ClerkFlow-Authentication-And-Database-Browser-Extension
+ClerkFlow is a production-ready Manifest V3 browser extension boilerplate engineered for absolute security and data integrity. It integrates Clerk for secure user authentication and session management, leveraging a dedicated MongoDB backend for persistent, encrypted data storage within the extension context.
 
-ClerkFlow is a robust browser extension engineered for secure user authentication via Clerk and persistent data management with MongoDB. It delivers comprehensive session handling, secure data storage within the browser environment, and a secure, efficient API layer to bridge extension functionalities with backend services.
+This repository serves as the definitive foundation for building robust, data-driven web extensions adhering to modern browser security standards.
 
-## 🚀 Overview
+## :dna: Architecture & Structure
 
-This project serves as a prime example of building secure, feature-rich browser extensions leveraging modern authentication and database technologies. It demonstrates best practices for managing user identity, storing sensitive data safely, and interacting with remote services from a browser context using Manifest V3 standards.
+This project utilizes a modern **Feature-Sliced Design (FSD)** methodology within a **TypeScript/React** ecosystem, managed by **Vite**. The core is a fully contained, security-hardened extension bundle.
 
-## 🎯 Key Features
+mermaid
+graph TD
+    subgraph Browser Environment
+        A[Service Worker / Background] --> C(State Manager / Session Store)
+        B[Content Scripts / UI] --> D(React Client / Pop-up)
+    end
+    D -- Authenticated Fetch --> E(Clerk API Gateway)
+    E --> F{Backend Adapter}
+    F -- Encrypted Data --> G[(MongoDB Atlas)]
+    C -- Session Token --> F
 
-*   **Secure Authentication:** Integrated with Clerk for robust, token-based user authentication and session management.
-*   **Persistent Data Storage:** Utilizes MongoDB for secure, scalable data persistence, accessible via a controlled API.
-*   **Manifest V3 Compliance:** Built with the latest browser extension standards for enhanced security and performance.
-*   **Background Service Workers:** Efficient handling of background tasks, API calls, and authentication flows.
-*   **Content Script Interaction:** Seamless communication between web pages and the extension for data capture or manipulation.
-*   **Secure API Layer:** Dedicated API endpoints for secure data exchange between the extension and MongoDB.
-
-## 🏗️ Architecture
-
-ClerkFlow employs a modular architecture tailored for browser extensions, separating concerns between UI, background processes, and content scripts. The primary components include:
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#ccf,stroke:#333,stroke-width:2px
 
 
-ClerkFlow-Authentication-And-Database-Browser-Extension/
-├── .github/                      # GitHub workflows and templates
-├── public/                       # Static assets for the extension
-├── src/
-│   ├── api/                      # Backend API interactions (e.g., MongoDB access)
-│   ├── background/               # Background service worker logic (auth, data sync)
-│   ├── components/               # Reusable UI components for popup/options pages
-│   ├── content-scripts/          # Scripts interacting with web page DOM
-│   ├── popup/                    # Main extension popup UI
-│   ├── options/                  # Extension options page UI
-│   └── utils/                    # Utility functions (e.g., Clerk setup)
-├── tests/                        # Unit and integration tests
-├── .env.example                  # Environment variables template
-├── package.json                  # Project dependencies and scripts
-└── ...                           # Other configuration files
+## :books: Table of Contents
 
-
-## 📋 Table of Contents
-
-*   [🚀 Overview](#-overview)
-*   [🎯 Key Features](#-key-features)
-*   [🏗️ Architecture](#️-architecture)
-*   [📋 Table of Contents](#-table-of-contents)
-*   [🤖 AI Agent Directives](#-ai-agent-directives)
-*   [🛠️ Setup & Development](#️-setup--development)
-    *   [Prerequisites](#prerequisites)
-    *   [Installation](#installation)
-    *   [Available Scripts](#available-scripts)
-*   [🧪 Testing](#-testing)
-*   [🤝 Contributing](#-contributing)
-*   [🛡️ Security](#️-security)
-*   [📜 License](#-license)
-*   [🌟 Show Your Support](#-show-your-support)
+1.  [Project Overview](#-project-overview)
+2.  [Architecture & Structure](#-architecture--structure)
+3.  [Tech Stack & Compliance](#-tech-stack--compliance)
+4.  [🤖 AI Agent Directives](#-ai-agent-directives)
+5.  [Development Setup](#-development-setup)
+6.  [Contribution Guidelines](#-contribution-guidelines)
+7.  [Security & Licensing](#-security--licensing)
 
 ---
+
+## :zap: Tech Stack & Compliance
+
+This extension is built to the highest standards enforced by the Apex Technical Authority, prioritizing performance, strict typing, and modern browser policies (Manifest V3).
+
+| Category | Technology | Rationale |
+| :--- | :--- | :--- |
+| **Core Language** | TypeScript 5.x | Strict typing enforces contract correctness. |
+| **Build Tool** | Vite 5+ | Rapid development, optimized bundling for extensions. |
+| **UI/Components** | React 18+ (Hooks) | Declarative UI management. |
+| **Styling** | TailwindCSS v4 (JIT) | Utility-first, highly efficient styling pipeline. |
+| **Authentication** | Clerk SDK | Secure, managed OAuth/SSO authentication. |
+| **Data Persistence** | MongoDB | Scalable, flexible document store for user session data. |
+| **Linter/Formatter** | Biome | Unifying linting, formatting, and testing speed (replacing ESLint/Prettier). |
+| **Testing** | Vitest (Unit) / Playwright (E2E) | Comprehensive quality assurance suite. |
+
+## 🤖 AI Agent Directives
 
 <details>
-<summary>🤖 AI Agent Directives (CRITICAL: For Automated Development & Maintenance)</summary>
+<summary>Click to expand Apex Agent Configuration</summary>
 
 # SYSTEM: APEX TECHNICAL AUTHORITY & ELITE ARCHITECT (DECEMBER 2025 EDITION)
 
@@ -102,183 +82,94 @@ ClerkFlow-Authentication-And-Database-Browser-Extension/
     *   **Semantic Correction:** **STRICTLY FORBIDDEN** from executing literal typos. You must **INFER** technical intent based on the project context.
     *   **Logic Anchor:** Treat the `README.md` as the **Single Source of Truth (SSOT)**.
 *   **MANDATORY MCP INSTRUMENTATION:**
-    *   **No Guessing:** Do not hallucinate APIs.
-    *   **Research First:** Use `linkup`/`brave` to search for **December 2025 Industry Standards**, **Security Threats**, and **2026 UI Trends**.
-    *   **Validation:** Use `docfork` to verify *every* external API signature.
-    *   **Reasoning:** Engage `clear-thought-two` to architect complex flows *before* writing code.
+    *   **No Guessing:** Do not hallucinate APIs. Do not assume libraries are installed if not specified in dependency files.
+    *   **Research First:** Use `linkup`/`brave` to search for **December 2025 Industry Standards**, **Security Threats (e.g., XSS in MV3 Contexts)**, and **2026 UI Trends**.
+    *   **Validation:** Use `docfork` to verify *every* external API signature (Clerk, MongoDB Node Driver).
+    *   **Reasoning:** Engage `clear-thought-two` to architect complex flows *before* writing code, especially regarding Service Worker isolation and secure token storage.
 
 ---
 
 ## 3. CONTEXT-AWARE APEX TECH STACKS (LATE 2025 STANDARDS)
-**Directives:** This project, `ClerkFlow-Authentication-And-Database-Browser-Extension`, is a JavaScript-based browser extension leveraging secure authentication and data persistence.
+**Directives:** Detect the project type and apply the corresponding **Apex Toolchain**.
 
-*   **PRIMARY SCENARIO: WEB / APP / EXTENSION (JavaScript/TypeScript)**
-    *   **Stack:** This project primarily uses **JavaScript (ES Modules)**, targeting **Manifest V3** for robust browser extension development.
-        *   **Authentication:** **Clerk** is the chosen provider for secure user authentication, session management, and user identity services.
-        *   **Data Persistence:** **MongoDB** is utilized for backend data storage, accessed via a secure API layer.
-        *   **Future-Proofing:** While currently JavaScript, future enhancements should consider migrating to **TypeScript 6.x (Strict)** for improved type safety and maintainability. Integration with **WXT** (Web eXtension Toolkit) or similar modern extension frameworks is recommended for streamlined development and build processes.
-    *   **Linting & Formatting:** **ESLint** with `airbnb` configuration and **Prettier** are mandated for code quality and consistency.
-    *   **Testing:** **Vitest** for fast unit and integration tests, and **Playwright** for robust end-to-end (E2E) testing of extension functionalities across different browser environments.
-    *   **Architecture:** Adheres to a **Modular Browser Extension Architecture**, applying principles similar to Feature-Sliced Design (FSD) where components, background scripts, content scripts, and utility modules are clearly separated and communicate via defined interfaces (e.g., message passing, indexedDB).
-    *   **Security:** Emphasize secure storage practices, API key management (environment variables, secure backend), and strict Content Security Policies (CSPs) compliant with Manifest V3. All communication with Clerk and MongoDB APIs must use secure protocols (HTTPS).
+*   **PRIMARY SCENARIO: WEB / APP / EXTENSION (TypeScript)**
+    *   **Stack:** This project demands **TypeScript 6.x** (Strict Mode Enforced), **Vite 7** (for bundling and dev server), and **Tauri v2.x** (if migrating to native; otherwise standard MV3 build). For extension building, **WXT** is the preferred abstraction layer for Manifest V3 compliance.
+    *   **Lint/Test:** **Biome** (for speed and unification across lint/format) + **Vitest** (Unit/Component Testing) + **Playwright** (E2E testing covering pop-up interactions and background service worker connectivity).
+    *   **Architecture:** Enforce **Feature-Sliced Design (FSD)** across `src/features`, `src/entities`, `src/pages` (or layers like `ui`, `services`).
+    *   **Security Focus:** All Clerk session management must strictly follow background service worker isolation protocols. Sensitive data MUST use `chrome.storage.local` only for encrypted tokens, never plaintext JWTs.
 
-*   **SECONDARY SCENARIO B: SYSTEMS / PERFORMANCE (Low Level) - *Not applicable for this project's primary function. Reference only for potential future backend microservices.***
-    *   **Stack:** Rust (Cargo) or Go (Modules).
-    *   **Lint:** Clippy / GolangCI-Lint.
-    *   **Architecture:** Hexagonal Architecture (Ports & Adapters).
+## 4. VERIFICATION COMMANDS
 
-*   **SECONDARY SCENARIO C: DATA / AI / SCRIPTS (Python) - *Not applicable for this project's primary function. Reference only for potential future data processing or AI integrations.***
-    *   **Stack:** uv (Manager), Ruff (Linter), Pytest (Test).
-    *   **Architecture:** Modular Monolith or Microservices.
+| Action | Command | Notes |
+| :--- | :--- | :--- |
+| **Install Dependencies** | `npm install` | Ensure all base dependencies are resolved. |
+| **Run Linter/Formatter** | `npx @biomejs/biome check --apply .` | Enforce style and catch structural errors. |
+| **Unit Tests** | `npx vitest` | Run module-level component and logic tests. |
+| **E2E Tests** | `npx playwright test` | Simulate full user journeys via browser simulation. |
+| **Build Extension** | `npm run build` | Generates production-ready MV3 artifacts in `/dist`. |
 
----
+## 5. ARCHITECTURAL PRINCIPLES
 
-## 4. DEVELOPMENT & VERIFICATION STANDARDS
+1.  **SOLID:** Applied strictly to service/data layers. Services must adhere to Single Responsibility.
+2.  **DRY:** Functions and configuration must be centralized. Avoid hardcoding Clerk keys.
+3.  **YAGNI:** Do not implement features beyond authentication and data persistence scaffolding until required by specification.
+4.  **MV3 Compliance:** All long-running tasks must be managed via event listeners in the Service Worker; avoid persistent background pages.
 
-### A. CODE QUALITY & BEST PRACTICES
-*   **SOLID Principles:** Adherence to Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion.
-*   **DRY (Don't Repeat Yourself):** Promote reusable components and utility functions.
-*   **YAGNI (You Ain't Gonna Need It):** Develop only necessary features, avoid premature optimization.
-*   **Atomic Commits:** Each commit should represent a single logical change.
-*   **Code Review:** Mandatory for all merge requests.
-*   **Documentation:** Clear inline comments for complex logic, comprehensive JSDoc for functions/modules, and updated README/CONTRIBUTING files.
-
-### B. TESTING STRATEGY
-*   **Unit Tests:** Every critical function and module must have comprehensive unit tests using Vitest.
-*   **Integration Tests:** Verify interactions between different parts of the extension (e.g., popup communicating with background script).
-*   **End-to-End (E2E) Tests:** Use Playwright to simulate user interactions within the browser and ensure the extension functions correctly in a real browser environment.
-*   **Code Coverage:** Maintain a minimum of 80% code coverage.
-
-### C. SECURITY MANDATES
-*   **Input Validation:** All user inputs and API responses must be rigorously validated.
-*   **Sanitization:** Prevent XSS and injection attacks.
-*   **Least Privilege:** Extension permissions should be minimal and justified.
-*   **Secure Storage:** Sensitive data must be stored securely (e.g., Clerk's secure tokens, not plain localStorage).
-*   **Dependency Audits:** Regularly scan for known vulnerabilities in third-party libraries.
-*   **CSP (Content Security Policy):** Strictly defined and enforced for Manifest V3 compliance.
-
-### D. DEPLOYMENT & RELEASE
-*   **CI/CD Automation:** Automated builds, tests, and deployment via GitHub Actions.
-*   **Semantic Versioning:** Follow `MAJOR.MINOR.PATCH` for releases.
-*   **Release Notes:** Clear documentation for each release.
-
-### E. VERIFICATION COMMANDS (for Automated Agents)
-To verify the project's health and readiness, execute the following:
-
-*   **Dependency Installation:**
-    bash
-    npm install
-    # or if using a modern package manager like 'uv' (for Python projects, not JS)
-    # uv sync
-    
-*   **Linting & Formatting Check:**
-    bash
-    npm run lint
-    npm run format:check
-    
-*   **Run All Tests (Unit, Integration):**
-    bash
-    npm test
-    
-*   **Build the Extension:**
-    bash
-    npm run build
-    
-*   **Start Development Server (if applicable):**
-    bash
-    npm run start
-    
 </details>
 
----
+## :construction: Development Setup
 
-## 🛠️ Setup & Development
+This boilerplate assumes Node.js (v18+) and npm/uv are installed. This repository uses TypeScript and React for the UI layer.
 
-Follow these instructions to get a development environment up and running.
-
-### Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-
-*   Node.js (LTS version)
-*   npm or Yarn package manager
-*   A Clerk account and API keys
-*   Access to a MongoDB instance (local or cloud-hosted)
-*   A `.env` file configured with your Clerk and MongoDB connection details (refer to `.env.example`)
-
-### Installation
-
-1.  **Clone the repository:**
+1.  **Clone Repository:**
     bash
-    git clone https://https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension.git
-    cd ClerkFlow-Authentication-And-Database-Browser-Extension
+    git clone https://github.com/chirag127/ClerkFlow-Secure-Auth-Browser-Extension.git
+    cd ClerkFlow-Secure-Auth-Browser-Extension
     
 
-2.  **Install dependencies:**
+2.  **Install Dependencies (Using npm):**
     bash
     npm install
-    # or yarn install
     
 
-3.  **Configure Environment Variables:**
-    Create a `.env` file in the root directory based on `.env.example` and fill in your credentials:
-    
-    CLERK_PUBLISHABLE_KEY=pk_live_YOUR_CLERK_PUBLISHABLE_KEY
-    CLERK_SECRET_KEY=sk_live_YOUR_CLERK_SECRET_KEY
-    MONGO_DB_URI=mongodb+srv://YOUR_MONGO_USER:YOUR_MONGO_PASSWORD@YOUR_CLUSTER.mongodb.net/clerkflowdb?retryWrites=true&w=majority
-    API_PORT=3000
+3.  **Environment Configuration:**
+    Create a `.env` file in the root directory with your Clerk and MongoDB connection details:
+    env
+    VITE_CLERK_PUBLISHABLE_KEY="pk_live_..."
+    MONGODB_URI="mongodb+srv://user:pass@cluster.mongodb.net/extension_data?retryWrites=true&w=majority"
     
 
-4.  **Build the extension:**
+4.  **Run Development Server:**
     bash
-    npm run build
+    npm run dev
     
-    This will compile the extension files into a `dist/` directory.
 
-5.  **Load the extension in your browser:**
-    *   Open your browser's extension management page (e.g., `chrome://extensions` for Chrome, `about:debugging#/runtime/this-firefox` for Firefox).
-    *   Enable "Developer mode."
-    *   Click "Load unpacked" (or "Load Temporary Add-on" for Firefox) and select the `dist/` directory.
+### Scripts
 
-### Available Scripts
+| Script | Command | Description |
+| :--- | :--- | :--- |
+| `dev` | `npm run dev` | Starts Vite dev server with HMR for extension components. |
+| `build` | `npm run build` | Compiles and bundles the extension for production/testing. |
+| `lint` | `npx @biomejs/biome check .` | Runs static analysis and formatting checks. |
+| `test:unit` | `npx vitest` | Executes unit and component tests. |
+| `test:e2e` | `npx playwright test` | Executes end-to-end browser automation tests. |
 
-In the project directory, you can run:
+## :handshake: Contribution Guidelines
 
-| Script            | Description                                                     |
-| :---------------- | :-------------------------------------------------------------- |
-| `npm start`       | Starts the development server for watch mode and live reloading. |
-| `npm run build`   | Builds the extension for production to the `dist` folder.       |
-| `npm test`        | Launches the test runner (Vitest).                              |
-| `npm run lint`    | Runs ESLint to check for code style issues.                     |
-| `npm run format`  | Runs Prettier to automatically format code.                     |
-| `npm run format:check` | Checks code formatting without applying changes.           |
-| `npm run deploy`  | (Optional) Script to package and prepare for deployment.        |
+Please see the dedicated [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for detailed instructions on submitting pull requests, reporting bugs, and setting up your development environment.
 
-## 🧪 Testing
+## :lock: Security & Licensing
 
-The testing suite for ClerkFlow is built with a focus on reliability and coverage.
+### Security
 
-*   **Unit Tests:** Developed using **Vitest**, located in the `tests/unit/` directory. Run with `npm test`.
-*   **Integration Tests:** Also using **Vitest**, found in `tests/integration/`. These verify interactions between modules.
-*   **End-to-End (E2E) Tests:** Powered by **Playwright**, these tests simulate real user scenarios within a browser environment. (Instructions to be added or linked in `tests/e2e/README.md`)
+Security is paramount. All authentication tokens related to Clerk sessions are handled exclusively within the isolated Service Worker context. Data persistence in MongoDB must use parameterized queries to mitigate injection risks.
 
-To run all tests:
-bash
-npm test
+Please review our security policy at [.github/SECURITY.md](./.github/SECURITY.md).
 
+### License
 
-## 🤝 Contributing
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**. See the [LICENSE](./LICENSE) file for details.
 
-We welcome contributions! Please refer to our [CONTRIBUTING.md](.github/CONTRIBUTING.md) for detailed guidelines on how to get started, report bugs, and propose features.
+---
 
-## 🛡️ Security
-
-Your security is our priority. ClerkFlow follows industry best practices to ensure data integrity and user privacy. For more details on our security measures and how to report vulnerabilities, please see [SECURITY.md](.github/SECURITY.md).
-
-## 📜 License
-
-This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International Public License (CC BY-NC 4.0)**. See the [LICENSE](LICENSE) file for details.
-
-## 🌟 Show Your Support
-
-Give a ⭐ if this project helped you! Your support encourages further development and enhancements.
+*Built with Apex Authority standards by Chirag127.*
