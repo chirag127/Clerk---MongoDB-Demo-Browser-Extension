@@ -1,36 +1,41 @@
-# Node.js
-node_modules/
-npm-debug.log
-yarn-debug.log
-yarn-error.log
-.pnp.cjs
-.pnp.loader.cjs
-
-# Build artifacts
-dist/
-build/
-out/
-coverage/
-
-# Editor/IDE
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-
-# Environment variables
+# Node / npm / Yarn / pnpm
+node_modules
+dist
+build
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+
+# Vite
+*.local
 
 # Logs
+logs
 *.log
-logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# OS generated files
+# Editor directories and files
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Build output
+.next/
+.nuxt/
+.vuepress/
+public/build/
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+*.local
 .DS_Store
 Thumbs.db
-
-# Browser Extension specific build outputs
-*.zip
-web-ext-artifacts/
