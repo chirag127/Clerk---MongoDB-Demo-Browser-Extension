@@ -1,146 +1,102 @@
 /**
- * API service for communicating with the backend
+ * Service for managing notes using chrome.storage.local.
+ * This is a frontend-only implementation, replacing the original backend API service.
  */
-
 class ApiService {
     /**
-     * Get the authentication token from storage
-     * @returns {Promise<string|null>} The authentication token or null if not found
-     */
-    static async getAuthToken() {
-        // If bypass auth is enabled, return a mock token
-        if (config.debug && config.debug.bypassAuth) {
-            console.log("API: Auth bypass enabled, returning mock token");
-            return "mock_token_for_testing_only";
-        }
-
-        return new Promise((resolve) => {
-            chrome.storage.local.get(
-                [config.storageKeys.authToken],
-                (result) => {
-                    resolve(result[config.storageKeys.authToken] || null);
-                }
-            );
-        });
-    }
-
-    /**
-     * Make an authenticated API request
-     * @param {string} endpoint - The API endpoint
-     * @param {Object} options - Request options
-     * @returns {Promise<Object>} The API response
-     */
-    static async request(endpoint, options = {}) {
-        const token = await this.getAuthToken();
-
-        if (!token && !options.public) {
-            throw new Error("Authentication required");
-        }
-
-        const url = `${config.apiBaseUrl}${endpoint}`;
-
-        const headers = {
-            "Content-Type": "application/json",
-            ...(token && !options.public
-                ? { Authorization: `Bearer ${token}` }
-                : {}),
-        };
-
-        const fetchOptions = {
-            method: options.method || "GET",
-            headers,
-            ...(options.body ? { body: JSON.stringify(options.body) } : {}),
-        };
-
-        try {
-            const response = await fetch(url, fetchOptions);
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || "API request failed");
-            }
-
-            return data;
-        } catch (error) {
-            console.error("API request error:", error);
-            throw error;
-        }
-    }
-
-    /**
-     * Get all notes for the authenticated user
-     * @returns {Promise<Array>} Array of notes
+     * Retrieves all notes from local storage.
+     * @returns {Promise<Array>} A promise that resolves to an array of notes.
      */
     static async getNotes() {
-        return this.request("/notes");
+        return new Promise((resolve) => {
+            chrome.storage.local.get(['notes'], (result) => {
+                resolve(result.notes || []);
+            });
+        });
     }
 
     /**
-     * Create a new note
-     * @param {string} content - The note content
-     * @returns {Promise<Object>} The created note
+     * Creates a new note and saves it to local storage.
+     * @param {string} content - The content of the note.
+     * @returns {Promise<Object>} A promise that resolves to the newly created note.
      */
     static async createNote(content) {
-        return this.request("/notes", {
-            method: "POST",
-            body: { content },
+        const notes = await this.getNotes();
+        const newNote = {
+            id: crypto.randomUUID(),
+            content: content,
+            createdAt: new Date().toISOString(),
+        };
+        notes.push(newNote);
+        return new Promise((resolve) => {
+            chrome.storage.local.set({ notes: notes }, () => {
+                resolve(newNote);
+            });
         });
     }
 
     /**
-     * Update an existing note
-     * @param {string} id - The note ID
-     * @param {string} content - The updated note content
-     * @returns {Promise<Object>} The updated note
+     * Updates an existing note in local storage.
+     * @param {string} id - The ID of the note to update.
+     * @param {string} content - The updated content for the note.
+     * @returns {Promise<Object|null>} A promise that resolves to the updated note, or null if not found.
      */
     static async updateNote(id, content) {
-        return this.request(`/notes/${id}`, {
-            method: "PUT",
-            body: { content },
+        const notes = await this.getNotes();
+        const noteIndex = notes.findIndex((note) => note.id === id);
+
+        if (noteIndex === -1) {
+            return null; // Note not found
+        }
+
+        notes[noteIndex].content = content;
+        notes[noteIndex].updatedAt = new Date().toISOString();
+
+        return new Promise((resolve) => {
+            chrome.storage.local.set({ notes: notes }, () => {
+                resolve(notes[noteIndex]);
+            });
         });
     }
 
     /**
-     * Delete a note
-     * @param {string} id - The note ID
-     * @returns {Promise<Object>} The response
+     * Deletes a note from local storage.
+     * @param {string} id - The ID of the note to delete.
+     * @returns {Promise<{success: boolean}>} A promise that resolves to an object indicating success.
      */
     static async deleteNote(id) {
-        return this.request(`/notes/${id}`, {
-            method: "DELETE",
+        let notes = await this.getNotes();
+        const updatedNotes = notes.filter((note) => note.id !== id);
+
+        return new Promise((resolve) => {
+            chrome.storage.local.set({ notes: updatedNotes }, () => {
+                resolve({ success: true });
+            });
         });
     }
 
     /**
-     * Check if the API server is running
-     * @returns {Promise<boolean>} True if the server is running
+     * Saves a user-provided API key to local storage.
+     * @param {string} apiKey - The API key to save.
+     * @returns {Promise<{success: boolean}>} A promise that resolves to an object indicating success.
      */
-    static async checkHealth() {
-        try {
-            const url = `${config.apiBaseUrl}/health`;
-            console.log("Checking health at:", url);
-
-            const response = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+    static async saveApiKey(apiKey) {
+        return new Promise((resolve) => {
+            chrome.storage.local.set({ 'user_api_key': apiKey }, () => {
+                resolve({ success: true });
             });
+        });
+    }
 
-            if (!response.ok) {
-                console.error(
-                    "Health check failed with status:",
-                    response.status
-                );
-                return false;
-            }
-
-            const data = await response.json();
-            console.log("Health check response:", data);
-            return data.status === "ok";
-        } catch (error) {
-            console.error("Health check error:", error);
-            return false;
-        }
+    /**
+     * Retrieves the user-provided API key from local storage.
+     * @returns {Promise<string|null>} A promise that resolves to the API key or null if not set.
+     */
+    static async getApiKey() {
+        return new Promise((resolve) => {
+            chrome.storage.local.get(['user_api_key'], (result) => {
+                resolve(result.user_api_key || null);
+            });
+        });
     }
 }

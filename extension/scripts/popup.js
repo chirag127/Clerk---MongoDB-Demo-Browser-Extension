@@ -34,27 +34,6 @@ async function initPopup() {
     try {
         addDebugInfo("Starting initialization...");
 
-        // Check if the API server is running
-        addDebugInfo("Checking if backend server is running...");
-        let isServerRunning = false;
-        try {
-            isServerRunning = await ApiService.checkHealth();
-            addDebugInfo(
-                `Backend server status: ${
-                    isServerRunning ? "Running" : "Not running"
-                }`
-            );
-        } catch (serverError) {
-            addDebugInfo(`Error checking server: ${serverError.message}`);
-        }
-
-        if (!isServerRunning) {
-            showStatusMessage(
-                "Backend server is not running. Please start the server.",
-                "error"
-            );
-        }
-
         // Initialize Clerk with a delay to ensure script is loaded
         addDebugInfo("Waiting for Clerk script to load...");
 
@@ -122,76 +101,59 @@ async function initPopup() {
     }
 }
 
-// Test API connection
-async function testApiConnection() {
-    addDebugInfo("Testing API connection...");
-
-    try {
-        // Test health endpoint
-        addDebugInfo("Testing health endpoint...");
-        const healthUrl = `${config.apiBaseUrl}/health`;
-        const healthResponse = await fetch(healthUrl);
-        const healthData = await healthResponse.json();
-        addDebugInfo(`Health endpoint response: ${JSON.stringify(healthData)}`);
-
-        // Test test endpoint
-        addDebugInfo("Testing test endpoint...");
-        const testUrl = `${config.apiBaseUrl}/test`;
-        const testResponse = await fetch(testUrl);
-        const testData = await testResponse.json();
-        addDebugInfo(`Test endpoint response: ${JSON.stringify(testData)}`);
-
-        showStatusMessage("API connection successful", "success");
-    } catch (error) {
-        addDebugInfo(`API test error: ${error.message}`);
-        showStatusMessage("API connection failed", "error");
-    }
-}
-
 // Set up event listeners
 function setupEventListeners() {
     // Add note button
-    const addNoteBtn = document.getElementById("add-note-btn");
-    if (addNoteBtn) {
-        addNoteBtn.addEventListener("click", () => {
-            const noteFormContainer = document.getElementById(
-                "note-form-container"
-            );
-            noteFormContainer.classList.remove("hidden");
-            document.getElementById("note-content").focus();
-        });
-    }
+    document.getElementById("add-note-btn").addEventListener("click", () => {
+        document.getElementById("note-form-container").classList.remove("hidden");
+        document.getElementById("note-content").focus();
+    });
 
     // Cancel note button
-    const cancelNoteBtn = document.getElementById("cancel-note-btn");
-    if (cancelNoteBtn) {
-        cancelNoteBtn.addEventListener("click", () => {
-            NotesService.resetNoteForm();
-        });
-    }
+    document.getElementById("cancel-note-btn").addEventListener("click", () => {
+        NotesService.resetNoteForm();
+    });
 
     // Note form submission
-    const noteForm = document.getElementById("note-form");
-    if (noteForm) {
-        noteForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const noteContent = document
-                .getElementById("note-content")
-                .value.trim();
-            if (!noteContent) {
-                showStatusMessage("Note content cannot be empty", "warning");
-                return;
-            }
-
+    document.getElementById("note-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const noteContent = document.getElementById("note-content").value.trim();
+        if (noteContent) {
             await NotesService.saveNote(noteContent);
-        });
-    }
+        } else {
+            showStatusMessage("Note content cannot be empty", "warning");
+        }
+    });
 
-    // Test API connection button
-    const testApiBtn = document.getElementById("test-api-btn");
-    if (testApiBtn) {
-        testApiBtn.addEventListener("click", testApiConnection);
+    // Settings button
+    document.getElementById("settings-btn").addEventListener("click", () => {
+        document.getElementById("notes-section").classList.add("hidden");
+        document.getElementById("settings-section").classList.remove("hidden");
+        loadApiKey();
+    });
+
+    // API key form submission
+    document.getElementById("api-key-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const apiKey = document.getElementById("api-key-input").value.trim();
+        await ApiService.saveApiKey(apiKey);
+        showStatusMessage("API Key saved successfully!");
+        document.getElementById("settings-section").classList.add("hidden");
+        document.getElementById("notes-section").classList.remove("hidden");
+    });
+
+    // A simple debug button to show the saved API key
+    document.getElementById("test-api-btn").addEventListener("click", async () => {
+        const apiKey = await ApiService.getApiKey();
+        addDebugInfo(`Current API Key: ${apiKey ? apiKey.substring(0, 5) + '...' : 'Not set'}`);
+    });
+}
+
+// Load the API key into the settings input
+async function loadApiKey() {
+    const apiKey = await ApiService.getApiKey();
+    if (apiKey) {
+        document.getElementById("api-key-input").value = apiKey;
     }
 }
 
