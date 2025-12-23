@@ -1,5 +1,15 @@
 {
-  "dependencies": {
-    "sharp": "^0.34.5"
+  "name": "clerkflow-secure-auth-browser-extension",
+  "version": "1.0.0",
+  "description": "A frontend-only browser extension with secure auth and user-provided API keys.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.0-beta",
+    "vite": "^7.0.0-alpha.0",
+    "tailwindcss": "^4.0.0-alpha.13"
   }
 }

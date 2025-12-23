@@ -8,6 +8,7 @@ build
 
 # Vite
 *.local
+.vite
 
 # Logs
 logs

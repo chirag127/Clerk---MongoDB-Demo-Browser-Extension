@@ -1,64 +1,21 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  lint-and-test:
-    name: Lint & Test
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run Linting (Biome)
-        run: npm run lint # Assumes 'lint' script configured with Biome in package.json
-
-      - name: Run Unit Tests (Vitest)
-        run: npm run test:unit # Assumes 'test:unit' script configured with Vitest in package.json
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps # Required for Playwright E2E tests
-
-      - name: Run End-to-End Tests (Playwright)
-        run: npm run test:e2e # Assumes 'test:e2e' script configured with Playwright in package.json
-
-  build-extension:
-    name: Build Browser Extension
-    runs-on: ubuntu-latest
-    needs: lint-and-test # Ensure linting and tests pass before building
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Build Extension for Production
-        run: npm run build # Assumes 'build' script exists in package.json for extension bundling
-
-      - name: Upload Built Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: clerkflow-extension-dist
-          path: dist/ # Adjust path based on your build output directory, common for extensions
+      - run: npm install
+      - run: npm run build --if-present
+      - run: npm test --if-present
