@@ -1,0 +1,355 @@
+Here's the **`docs/styles.css`** file content tailored for the **ClerkAuth-MongoDB-Data-Browser-Extension** project. This CSS implements a **modern, glassmorphic design** using clean, semantic classes that can be applied with HTML5 and Tailwind CSS via CDN (as specified). Since Tailwind is used via CDN, we’ll use utility-first classes with custom overrides where necessary, but this file will include **custom CSS for glassmorphism and responsive enhancements** not fully covered by basic Tailwind utilities.
+
+---
+
+### ✅ File: `docs/styles.css`
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Global Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0f1117, #1a1d23);
+  color: #e2e8f0;
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Glassmorphism Card */
+.glass {
+  background: rgba(30, 36, 49, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+p {
+  color: #cbd5e1;
+  font-size: 1rem;
+}
+
+a {
+  color: #60a5fa;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+/* Button Style */
+.btn-primary {
+  background: linear-gradient(90deg, #4f46e5, #3b82f6);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Header & Navigation */
+header {
+  padding: 1.5rem 0;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.logo span {
+  color: #60a5fa;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+nav a {
+  color: #cbd5e1;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+  padding: 5rem 1.5rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #ffffff, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: #94a3b8;
+}
+
+/* Features Section */
+.features {
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-card {
+  @apply glass p-6 text-center;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: #60a5fa;
+  margin-bottom: 1rem;
+}
+
+/* About Section - Resume Layout */
+.resume-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  @apply glass;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.resume-header h2 {
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.resume-header p {
+  color: #94a3b8;
+}
+
+.resume-section {
+  margin-bottom: 2rem;
+}
+
+.resume-section h3 {
+  color: #60a5fa;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #334155;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.resume-item {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid #3b82f6;
+  padding-bottom: 0.5rem;
+}
+
+.resume-item h4 {
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 0.25rem;
+}
+
+.resume-item p {
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+/* Contact Form */
+.contact-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  @apply glass;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.5);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  background: rgba(15, 18, 23, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  color: #94a3b8;
+  position: relative;
+  z-index: 10;
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.social-links a {
+  color: #60a5fa;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #93c5fd;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  nav ul {
+    gap: 1rem;
+  }
+}
+
+/* Scrollbar Styling (Modern) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1117;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+```
+
+---
+
+### ✅ How to Use This File
+
+1. Save this content as `docs/styles.css`.
+2. In your HTML files (e.g., `index.html`, `about.html`, `contact.html`), include it with:
+   ```html
+   <link rel="stylesheet" href="docs/styles.css">
+   ```
+3. Include **Tailwind CSS via CDN** in the `<head>`:
+   ```html
+   <script src="https://cdn.tailwindcss.com"></script>
+   ```
+4. Add Google Fonts Inter:
+   ```html
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+   ```
+
+---
+
+### ✅ Notes
+
+- All styles support **glassmorphism**, dark gradients, and modern UI.
+- Footer will include: `Copyright (c) 2026 Chirag Singhal | Designed by Chirag Singhal` (to be added in HTML).
+- For `about.html`, use the `.resume-container` structure to display author profile.
+- For `contact.html`, use the `.contact-form` with form fields pointing to a service (e.g., Formspree or email via `mailto:`).
+
+Let me know if you'd like the full HTML files (`index.html`, `about.html`, `contact.html`) to go with this CSS!

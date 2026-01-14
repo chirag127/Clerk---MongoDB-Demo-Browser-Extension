@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClerkFlow - Authentication & Database Browser Extension</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <nav class="glass sticky top-0 z-50 px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-database text-2xl"></i>
+                <span class="text-xl font-bold">ClerkFlow</span>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#features" class="hover:text-purple-300 transition">Features</a>
+                <a href="#how-it-works" class="hover:text-purple-300 transition">How it Works</a>
+                <a href="#installation" class="hover:text-purple-300 transition">Installation</a>
+                <a href="#contact" class="hover:text-purple-300 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 py-16">
+        <div class="glass rounded-3xl p-12 text-center">
+            <div class="flex justify-center mb-8">
+                <img src="https://raw.githubusercontent.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/main/.github/assets/banner.png" 
+                     alt="ClerkFlow Banner" 
+                     class="rounded-xl shadow-2xl max-w-full hover-scale">
+            </div>
+            <h1 class="text-5xl font-bold mb-6">ClerkAuth MongoDB Data Browser Extension</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                A powerful browser extension that seamlessly integrates Clerk authentication with MongoDB, 
+                allowing you to browse and manage your database data directly from your browser with secure authentication.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://github.com/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension" 
+                   class="glass px-8 py-4 rounded-full hover-scale inline-flex items-center space-x-2">
+                    <i class="fab fa-github text-2xl"></i>
+                    <span>View on GitHub</span>
+                </a>
+                <a href="#installation" 
+                   class="gradient-bg px-8 py-4 rounded-full hover-scale inline-flex items-center space-x-2">
+                    <i class="fas fa-download text-2xl"></i>
+                    <span>Install Extension</span>
+                </a>
+            </div>
+            <div class="mt-8 flex justify-center space-x-4">
+                <img src="https://img.shields.io/github/actions/workflow/status/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension/ci.yml?branch=main" 
+                     alt="CI Status" class="rounded">
+                <img src="https://img.shields.io/github/license/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension" 
+                     alt="License" class="rounded">
+                <img src="https://img.shields.io/github/last-commit/chirag127/ClerkFlow-Authentication-And-Database-Browser-Extension" 
+                     alt="Last Commit" class="rounded">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="container mx-auto px-6 py-16">
+        <h2 class="text-4xl font-bold text-center mb-12">Key Features</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass rounded-2xl p-8 hover-scale">
+                <div class="text-4xl mb-4 text-purple-300">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Secure Authentication</h3>
+                <p>Powered by Clerk for robust, secure user authentication with JWT tokens and session management.</p>
+            </div>
+            <div class="glass rounded-2xl p-8 hover-scale">
+                <div class="text-4xl mb-4 text-purple-300">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">MongoDB Integration</h3>
+                <p>Seamlessly connect to your MongoDB databases and browse collections, documents, and query data.</p>
+            </div>
+            <div class="glass rounded-2xl p-8 hover-scale">
+                <div class="text-4xl mb-4 text-purple-300">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Browser Extension</h3>
+                <p>Works directly in your browser as a convenient extension without leaving your development environment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="container mx-auto px-6 py-16">
+        <h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
+        <div class="glass rounded-3xl p-8">
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="glass-dark rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">1</span>
+                    </div>
+                    <h3 class="font-bold mb-2">Install Extension</h3>
+                    <p class="text-sm">Add the extension to your browser from Chrome Web Store or GitHub releases</p>
+                </div>
+                <div class="text-center">
+                    <div class="glass-dark rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">2</span>
+                    </div>
+                    <h3 class="font-bold mb-2">Authenticate</h3>
+                    <p class="text-sm">Sign in using Clerk's secure authentication system</p>
+                </div>
+                <div class="text-center">
+                    <div class="glass-dark rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">3</span>
+                    </div>
+                    <h3 class="font-bold mb-2">Connect Database</h3>
+                    <p class="text-sm">Configure your MongoDB connection string securely</p>
+                </div>
+                <div class="text-center">
+                    <div class="glass-dark rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">4</span>
+                    </div>
+                    <h3 class="font-bold mb-2">Browse Data</h3>
+                    <p class="text-sm">Access and manage your MongoDB data directly from the browser</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="container mx-auto px-6 py-16">
+        <h2 class="text-4xl font-bold text-center mb-12">Installation</h2>
+        <div class="glass rounded-3xl p-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">From Chrome Web Store</h3>
+                    <ol class="space-y-2">
+                        <li>1. Visit the Chrome Web Store</li>
+                        <li>2. Search for "ClerkFlow MongoDB Browser"</li>
+                        <li>3. Click "Add to Chrome"</li>
+                        <li>4. Grant necessary permissions</li>
+                    </ol>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">From GitHub Releases</h3>
+                    <ol class="space-y-2">
+                        <li>1. Download the latest release from GitHub</li>
+                        <li>2. Unzip the downloaded file</li>
+                        <li>3. Open Chrome extensions page</li>
+                        <li>4. Enable Developer Mode and load unpacked</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="container mx-auto px-6 py-16">
+        <h2 class="text-4xl font-bold text-center mb-12">Technology Stack</h2>
+        <div class="flex flex-wrap justify-center gap-6">
+            <div class="glass px-6 py-3 rounded-full hover-scale">
+                <i class="fab fa-chrome mr-2"></i>Chrome Extension
+            </div>
+            <div class="glass px-6 py-3 rounded-full hover-scale">
+                <i class="fas fa-lock mr-2"></i>Clerk Authentication
+            </div>
+            <div class="glass px-6 py-3 rounded-full hover-scale">
+                <i class="fas fa-leaf mr-2"></i>MongoDB
+            </div>
+            <div class="glass px-6 py-3 rounded-full hover-scale">
+                <i class="fab fa-js mr-2"></i>JavaScript
+            </div>
+            <div class="glass px-6 py-3 rounded-full hover-scale">
+                <i class="fas fa-code mr-2"></i>Manifest V3
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section id="contact" class="container mx-auto px-6 py-16">
+        <div class="glass rounded-3xl p-12 text-center">
+            <img src="https://github.com/chirag127.png" alt="Chirag Singhal" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-purple-400">
+            <h2 class="text-3xl font-bold mb-2">Chirag Singhal</h2>
+            <p class="text-xl mb-4">Software Engineer · Backend & GenAI Specialist</p>
+            <p class="mb-6">Bhubaneswar, Odisha, India</p>
+            <p class="mb-8 max-w-2xl mx-auto">
+                Passionate about building innovative solutions that bridge the gap between authentication and data management.
+                This project simplifies database browsing with secure authentication right in your browser.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://github.com/chirag127" class="glass px-6 py-3 rounded-full hover-scale">
+                    <i class="fab fa-github"></
